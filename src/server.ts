@@ -36,14 +36,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       res.status(400);
     }
 
-    var imageFiltered = await filterImageFromURL(imageUrl)
-    res.sendFile(imageFiltered, (err) => {
-      if (!err) {
-        deleteLocalFiles([imageFiltered]);
-      }
+    filterImageFromURL(imageUrl).then(imageFiltered => {
+      res.sendFile(imageFiltered, (err) => {
+        if (!err) {
+          deleteLocalFiles([imageFiltered]);
+        }
+      });
     });
-    
-    
+  
 
   });
 
